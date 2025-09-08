@@ -1,0 +1,1406 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "MoviesAndSeries",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Favorites/{userId}": {
+      "get": {
+        "tags": [
+          "Favorites"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Favorite"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Favorite"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Favorite"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Favorites": {
+      "post": {
+        "tags": [
+          "Favorites"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Favorite"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Favorite"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Favorite"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Favorite"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Favorite"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Favorite"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Favorites/{id}": {
+      "delete": {
+        "tags": [
+          "Favorites"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Movies": {
+      "get": {
+        "tags": [
+          "Movies"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Movie"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Movie"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Movie"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Movies"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Movie"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Movie"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Movie"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Movies/{id}": {
+      "get": {
+        "tags": [
+          "Movies"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Movies"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Movie"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Movie"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Movie"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Movies"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Ratings/movie/{movieId}": {
+      "get": {
+        "tags": [
+          "Ratings"
+        ],
+        "parameters": [
+          {
+            "name": "movieId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Rating"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Rating"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Rating"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Ratings/series/{seriesId}": {
+      "get": {
+        "tags": [
+          "Ratings"
+        ],
+        "parameters": [
+          {
+            "name": "seriesId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Rating"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Rating"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Rating"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Ratings": {
+      "post": {
+        "tags": [
+          "Ratings"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Rating"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Rating"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Rating"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rating"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rating"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rating"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Ratings/{id}": {
+      "put": {
+        "tags": [
+          "Ratings"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Rating"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Rating"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Rating"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Ratings"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Series": {
+      "get": {
+        "tags": [
+          "Series"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Series"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Series"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Series"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Series"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Series"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Series"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Series"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Series"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Series"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Series"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Series/{id}": {
+      "get": {
+        "tags": [
+          "Series"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Series"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Series"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Series"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Series"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Series"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Series"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Series"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Series"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/WatchHistory/{userId}": {
+      "get": {
+        "tags": [
+          "WatchHistory"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WatchHistory"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WatchHistory"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WatchHistory"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WatchHistory": {
+      "post": {
+        "tags": [
+          "WatchHistory"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WatchHistory"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WatchHistory"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WatchHistory"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/WatchHistory"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WatchHistory"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WatchHistory"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WatchHistory/{id}": {
+      "put": {
+        "tags": [
+          "WatchHistory"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WatchHistory"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WatchHistory"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WatchHistory"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WatchHistory"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/WeatherForecast": {
+      "get": {
+        "tags": [
+          "WeatherForecast"
+        ],
+        "operationId": "GetWeatherForecast",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Episode": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "seriesId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "series": {
+            "$ref": "#/components/schemas/Series"
+          },
+          "movieId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "movie": {
+            "$ref": "#/components/schemas/Movie"
+          },
+          "seasonNo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "episodeNo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "watchHistories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WatchHistory"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Favorite": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "seriesId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "series": {
+            "$ref": "#/components/schemas/Series"
+          },
+          "movieId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "movie": {
+            "$ref": "#/components/schemas/Movie"
+          },
+          "favoriteDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Genre": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "genreMaps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GenreMap"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GenreMap": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "seriesId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "series": {
+            "$ref": "#/components/schemas/Series"
+          },
+          "movieId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "movie": {
+            "$ref": "#/components/schemas/Movie"
+          },
+          "genreId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "genre": {
+            "$ref": "#/components/schemas/Genre"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Movie": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "score": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "trailer": {
+            "type": "string",
+            "nullable": true
+          },
+          "poster": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "publicationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ratings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Rating"
+            },
+            "nullable": true
+          },
+          "favorites": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Favorite"
+            },
+            "nullable": true
+          },
+          "genreMaps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GenreMap"
+            },
+            "nullable": true
+          },
+          "platformMaps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlatformMap"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Platform": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "platformMaps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlatformMap"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PlatformMap": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "movieId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "movie": {
+            "$ref": "#/components/schemas/Movie"
+          },
+          "seriesId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "series": {
+            "$ref": "#/components/schemas/Series"
+          },
+          "platformId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "platform": {
+            "$ref": "#/components/schemas/Platform"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Rating": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "seriesId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "series": {
+            "$ref": "#/components/schemas/Series"
+          },
+          "movieId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "movie": {
+            "$ref": "#/components/schemas/Movie"
+          },
+          "score": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "comment": {
+            "type": "string",
+            "nullable": true
+          },
+          "commentDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Series": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "score": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "trailer": {
+            "type": "string",
+            "nullable": true
+          },
+          "poster": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "publicationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "episodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Episode"
+            },
+            "nullable": true
+          },
+          "ratings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Rating"
+            },
+            "nullable": true
+          },
+          "favorites": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Favorite"
+            },
+            "nullable": true
+          },
+          "genreMaps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GenreMap"
+            },
+            "nullable": true
+          },
+          "platformMaps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlatformMap"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "gender": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "passwordHash": {
+            "type": "string",
+            "nullable": true
+          },
+          "profileImage": {
+            "type": "string",
+            "nullable": true
+          },
+          "watchHistories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WatchHistory"
+            },
+            "nullable": true
+          },
+          "ratings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Rating"
+            },
+            "nullable": true
+          },
+          "favorites": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Favorite"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WatchHistory": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "episodeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "episode": {
+            "$ref": "#/components/schemas/Episode"
+          },
+          "completed": {
+            "type": "boolean"
+          },
+          "completedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "remainingTime": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WeatherForecast": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "temperatureC": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "temperatureF": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
