@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "/Users/simay/Documents/GitHub/MovieAndSeries/MoviesAndSeries/MoviesAndSeries/MoviesAndSeries.csproj": {}
+    "C:\\Users\\DELL\\source\\repos\\MoviesAndSeries\\MoviesAndSeries\\MoviesAndSeries.csproj": {}
   },
   "projects": {
-    "/Users/simay/Documents/GitHub/MovieAndSeries/MoviesAndSeries/MoviesAndSeries/MoviesAndSeries.csproj": {
+    "C:\\Users\\DELL\\source\\repos\\MoviesAndSeries\\MoviesAndSeries\\MoviesAndSeries.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/simay/Documents/GitHub/MovieAndSeries/MoviesAndSeries/MoviesAndSeries/MoviesAndSeries.csproj",
+        "projectUniqueName": "C:\\Users\\DELL\\source\\repos\\MoviesAndSeries\\MoviesAndSeries\\MoviesAndSeries.csproj",
         "projectName": "MoviesAndSeries",
-        "projectPath": "/Users/simay/Documents/GitHub/MovieAndSeries/MoviesAndSeries/MoviesAndSeries/MoviesAndSeries.csproj",
-        "packagesPath": "/Users/simay/.nuget/packages/",
-        "outputPath": "/Users/simay/Documents/GitHub/MovieAndSeries/MoviesAndSeries/MoviesAndSeries/obj/",
+        "projectPath": "C:\\Users\\DELL\\source\\repos\\MoviesAndSeries\\MoviesAndSeries\\MoviesAndSeries.csproj",
+        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\DELL\\source\\repos\\MoviesAndSeries\\MoviesAndSeries\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/simay/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,29 +50,11 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
-            "BCrypt.Net-Next": {
-              "target": "Package",
-              "version": "[4.0.3, )"
-            },
-            "MailKit": {
-              "target": "Package",
-              "version": "[4.13.0, )"
-            },
-            "Microsoft.AspNetCore.Authentication.JwtBearer": {
-              "target": "Package",
-              "version": "[9.0.8, )"
-            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[9.0.6, )"
             },
             "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[9.0.8, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.8, )"
             },
@@ -80,37 +68,9 @@
               "target": "Package",
               "version": "[9.0.8, )"
             },
-            "Microsoft.IdentityModel.Tokens": {
-              "target": "Package",
-              "version": "[8.14.0, )"
-            },
-            "MimeKit": {
-              "target": "Package",
-              "version": "[4.13.0, )"
-            },
-            "Npgsql.EntityFrameworkCore.PostgreSQL": {
-              "target": "Package",
-              "version": "[9.0.4, )"
-            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[9.0.4, )"
-            },
-            "Swashbuckle.AspNetCore.Swagger": {
-              "target": "Package",
-              "version": "[9.0.4, )"
-            },
-            "Swashbuckle.AspNetCore.SwaggerGen": {
-              "target": "Package",
-              "version": "[9.0.4, )"
-            },
-            "Swashbuckle.AspNetCore.SwaggerUI": {
-              "target": "Package",
-              "version": "[9.0.4, )"
-            },
-            "System.IdentityModel.Tokens.Jwt": {
-              "target": "Package",
-              "version": "[8.14.0, )"
             }
           },
           "imports": [
@@ -132,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

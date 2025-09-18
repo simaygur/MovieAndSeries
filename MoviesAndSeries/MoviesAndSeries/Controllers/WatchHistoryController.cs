@@ -1,14 +1,13 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MoviesAndSeries.Data;
 using MoviesAndSeries.Dtos.Episode;
 using MoviesAndSeries.Dtos.User;
 using MoviesAndSeries.Dtos.WatchHistory;
 using MoviesAndSeries.Models.Entities;
-using Microsoft.AspNetCore.Authorization;
+
 namespace MoviesAndSeries.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class WatchHistoryController : ControllerBase
@@ -70,20 +69,6 @@ namespace MoviesAndSeries.Controllers
         [HttpPost]
         public async Task<ActionResult<WatchHistory>> AddWatchHistory([FromBody] CreateWatchHistoryDto request)
         {
-            // Upsert: Aynı kullanıcı ve bölüm için kayıt varsa güncelle, yoksa oluştur
-            var existing = await _context.WatchHistories
-                .FirstOrDefaultAsync(x => x.UserId == request.UserId && x.EpisodeId == request.EpisodeId);
-
-            if (existing != null)
-            {
-                existing.RemainingTime = request.RemainingTime;
-                // Bölüm değişmişse güncelle (genelde aynı kalır)
-                existing.EpisodeId = request.EpisodeId;
-                _context.Entry(existing).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
-                return Ok(existing);
-            }
-
             var watchHistory = new WatchHistory()
             {
                 EpisodeId = request.EpisodeId,
@@ -103,7 +88,6 @@ namespace MoviesAndSeries.Controllers
             if (watchHistory is null) return BadRequest();
             watchHistory.RemainingTime = request.RemainingTime;
             watchHistory.EpisodeId = request.EpisodeId;
-            watchHistory.Completed = request.Completed;
             _context.Entry(watchHistory).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return NoContent();

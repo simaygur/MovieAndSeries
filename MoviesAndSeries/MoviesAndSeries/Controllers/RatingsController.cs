@@ -3,10 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using MoviesAndSeries.Data;
 using MoviesAndSeries.Dtos.Rating;
 using MoviesAndSeries.Models.Entities;
-using Microsoft.AspNetCore.Authorization;
+
 namespace MoviesAndSeries.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class RatingsController : ControllerBase

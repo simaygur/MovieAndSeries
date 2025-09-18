@@ -14,7 +14,7 @@ namespace MoviesAndSeries.Dtos.Series
         public string Poster { get; set; }
         public DateTime PublicationDate { get; set; }
 
-        
+        public ListSeriesDto Series { get; set; }
 
         public List<ListEpisodeDto> Episode { get; set; }
         public List<ListGenreDto> Genres { get; set; }

@@ -7,13 +7,11 @@ using MoviesAndSeries.Dtos.Genre;
 using MoviesAndSeries.Dtos.Platform;
 using MoviesAndSeries.Dtos.Series;
 using MoviesAndSeries.Models.Entities;
-using Microsoft.AspNetCore.Authorization;
+
 namespace MoviesAndSeries.Controllers
 {
-   
     [Route("api/[controller]")]
-    [ApiController] 
-    [Authorize]
+    [ApiController]
     public class SeriesController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -23,54 +21,9 @@ namespace MoviesAndSeries.Controllers
             _context = context;
         }
 
-
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateSeriesDto request)
-        {
-            var series = new Series()
-            {
-                Name = request.Name,
-                PublicationDate = request.PublicationDate,
-                Score = request.Score,
-                Trailer = request.Trailer,
-                Poster = request.Poster,
-                Description = request.Description,
-            };
-
-            await _context.Series.AddAsync(series);
-            await _context.SaveChangesAsync();
-            
-            request.GenreIds.ForEach(f =>
-            {
-                _context.GenreMaps.Add(new GenreMap
-                {
-                    SeriesId = series.Id,
-                    MovieId = null,
-                    GenreId = f 
-                });
-            });
-            
-            request.PlatformIds.ForEach(p =>
-            {
-                _context.PlatformMaps.Add(new PlatformMap()
-                {
-                    SeriesId = series.Id,
-                    MovieId = null,
-                    PlatformId = p
-                });
-            });
-            await _context.SaveChangesAsync();
-            
-            return Ok();
-            //return NotFound();
-        }
-        
-        
-        
-
         // GET: api/series
         [HttpGet]
-        public async Task<ActionResult> GetSeries()
+        public async Task<ActionResult<IEnumerable<object>>> GetSeries()
         {
             var data = await _context.Series
 
@@ -80,32 +33,36 @@ namespace MoviesAndSeries.Controllers
                 .Include(s => s.PlatformMaps).ThenInclude(p => p.Platform)
                 .Select(x => new ListSeriesDto
                 {
-                    
-                    Id = x.Id,
-                    Name = x.Name,
-                    Score = x.Score,
-                    Description = x.Description,
-                    Poster = x.Poster,
-                    Trailer = x.Trailer,
-                    PublicationDate = x.PublicationDate,
-
-                    Episode = x.Episodes.Select(x => new ListEpisodeDto
+                    Series = new ListSeriesDto
                     {
-                        Id= x.Id,
-                        Name= x.Name
-                    }).ToList(),
+                        Id = x.Id,
+                        Name = x.Name,
+                        Score = x.Score,
+                        Description = x.Description,
+                        Poster = x.Poster,
+                        Trailer = x.Trailer,
+                        PublicationDate = x.PublicationDate,
 
-                    Genres = x.GenreMaps.Select(g => new ListGenreDto
-                    {
-                        Id =g.Genre.Id,
-                        Name = g.Genre.Name
-                    }).ToList(),
+                        Episode = x.Episodes.Select(x => new ListEpisodeDto
+                        {
+                           Id= x.Id,
+                           Name= x.Name
+                        }).ToList(),
 
-                    Platform = x.PlatformMaps.Select(g => new ListPlatformDto
-                    {
-                        Id= g.Platform.Id,
-                        Name= g.Platform.Name
-                    }).ToList()
+                        Genres = x.GenreMaps.Select(g => new ListGenreDto
+                        {
+                           Id =g.Genre.Id,
+                          Name = g.Genre.Name
+                        }).ToList(),
+
+                        Platform = x.PlatformMaps.Select(g => new ListPlatformDto
+                        {
+                           Id= g.Platform.Id,
+                           Name= g.Platform.Name
+                        }).ToList()
+
+                    }
+
 
 
 
@@ -113,12 +70,12 @@ namespace MoviesAndSeries.Controllers
 
                 .ToListAsync();
 
-            return Ok(data);
+            return data;
         }
 
         // GET: api/series/5
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetSeries(int id)
+        public async Task<ActionResult<Series>> GetSeries(int id)
         {
             var series = await _context.Series
                 .Include(s => s.Episodes)
@@ -128,7 +85,27 @@ namespace MoviesAndSeries.Controllers
                 .FirstOrDefaultAsync(s => s.Id == id);
 
             if (series == null) return NotFound();
-            return Ok(series);
+            return series;
+        }
+
+        // POST: api/series
+        [HttpPost]
+        public async Task<ActionResult<Series>> CreateSeries([FromBody] CreateSeriesDto request)
+        {
+            var series = new Series
+            {
+
+                Name = request.Name,
+                PublicationDate = request.PublicationDate,
+                Score = request.Score,
+                Trailer = request.Trailer,
+                Poster = request.Poster,
+                Description = request.Description
+
+            };
+            _context.Series.Add(series);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetSeries), new { id = series.Id }, series);
         }
 
         // PUT: api/series/5
@@ -145,29 +122,19 @@ namespace MoviesAndSeries.Controllers
 
             _context.Entry(series).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return Ok();
+            return NoContent();
         }
 
         // DELETE: api/series/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSeries(int id)
         {
-            // İlişkili tüm verileri Include metodu ile yükle
-            var series = await _context.Series
-                .Include(s => s.Episodes)
-                .Include(s => s.PlatformMaps)
-                .Include(s => s.GenreMaps)
-                .FirstOrDefaultAsync(s => s.Id == id);
-                               
+            var series = await _context.Series.FindAsync(id);
             if (series == null) return NotFound();
 
-            // Context'ten ana nesneyi (Series) kaldır.
-            // İlişkili nesneler (Episodes, PlatformLocations, Genres) de bellekte takip edildiği için,
-            // SaveChangesAsync çağrıldığında otomatik olarak silinecektir.
             _context.Series.Remove(series);
-    
             await _context.SaveChangesAsync();
-            return Ok();
+            return NoContent();
         }
     }
 }

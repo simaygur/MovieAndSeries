@@ -3,8 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MoviesAndSeries.Data;
 using MoviesAndSeries.Dtos.Genre;
 using MoviesAndSeries.Models.Entities;
-using Microsoft.AspNetCore.Authorization;
-[Authorize]
+
 [Route("api/[controller]")]
 [ApiController]
 public class GenresController : ControllerBase

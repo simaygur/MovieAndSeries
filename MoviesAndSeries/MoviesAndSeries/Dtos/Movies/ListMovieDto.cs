@@ -14,7 +14,7 @@ namespace MoviesAndSeries.Dtos.Movies
         public string Poster { get; set; }
         public string Description { get; set; }
         public DateTime PublicationDate { get; set; }
-        
+        public ListMovieDto movie { get; set; }
         public List< ListPlatformDto> Platform { get; set; }
         public List <ListGenreDto> Genres { get; set; }
         public List<ListEpisodeDto> Episode { get; set; }

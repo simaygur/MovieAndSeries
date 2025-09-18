@@ -4,11 +4,9 @@ using MoviesAndSeries.Data;
 using MoviesAndSeries.Dtos.Episode;
 using MoviesAndSeries.Dtos.User;
 using MoviesAndSeries.Models.Entities;
-using Microsoft.AspNetCore.Authorization;
 
 namespace MoviesAndSeries.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class EpisodesController : ControllerBase
@@ -20,57 +18,62 @@ namespace MoviesAndSeries.Controllers
             _context = context;
         }
 
-        // GET: api/episodes/by-movie/{movieId}
-        [HttpGet("by-movie/{movieId}")]
-        public async Task<ActionResult<IEnumerable<object>>> GetEpisodesByMovie(int movieId)
+        // GET: api/episodes/5 (userId)
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<object>>> GetEpisodes(int? movieId, int? seriesId)
         {
-            return await _context.Episodes
-                .Where(x => x.MovieId == movieId)
+            return await _context.Episodes.Where(x => x.SeriesId == seriesId || x.MovieId == movieId)
                 .Select(y => new ListEpisodeDto
                 {
-                    Id = y.Id,
+
                     Name = y.Name,
                     SeasonNo = y.SeasonNo,
                     EpisodeNo = y.EpisodeNo
+
                 })
                 .ToListAsync();
+
+
+            //return await _context.WatchHistories
+            //    .Include(w => w.Episode)
+            //    .ThenInclude(e => e.Series)
+            //    .Where(w => w.UserId == userId)
+
+            //.Select(x => new
+            // {
+            //     Series = new
+            //     {
+            //        Id= x.Id,
+            //        SeriesName=  x.Episode.Series.Name,
+            //        x.Episode,
+            //        x.Episode.Name
+
+
+
+            //     }
+
+
+
+
+            // })
+
+            //.ToListAsync();
         }
-// GET: api/episodes/by-series/{seriesId}
-        [HttpGet("by-series/{seriesId}")]
-        public async Task<ActionResult<IEnumerable<ListEpisodeDto>>> GetEpisodesBySeries(int seriesId)
-        {
-            // Improvement 1: The return type is now specific.
-            // Improvement 2: Added OrderBy and ThenBy for consistent results.
-            return await _context.Episodes
-                .Where(episode => episode.SeriesId == seriesId)
-                .OrderBy(episode => episode.SeasonNo)
-                .ThenBy(episode => episode.EpisodeNo)
-                .Select(episode => new ListEpisodeDto
-                {
-                    Id = episode.Id,
-                    Name = episode.Name,
-                    SeasonNo = episode.SeasonNo,
-                    EpisodeNo = episode.EpisodeNo,
-                    SeriesId = episode.SeriesId
-                })
-                .ToListAsync();
-        }
-        // GET: api/episodes/{id}
+
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<object>>> GetIdEpisodes(int? id)
         {
-            return await _context.Episodes
-                .Where(x => x.Id == id)
+            return await _context.Episodes.Where(x => x.Id == id)
                 .Select(y => new ListEpisodeDto
                 {
-                    Id = y.Id,
+
                     Name = y.Name,
                     SeasonNo = y.SeasonNo,
                     EpisodeNo = y.EpisodeNo
+
                 })
                 .ToListAsync();
         }
-
         // POST: api/episodes
         [HttpPost]
         public async Task<ActionResult<Episode>> AddEpisode([FromBody] CreateEpisodeDto request)
@@ -86,20 +89,24 @@ namespace MoviesAndSeries.Controllers
 
             _context.Episodes.Add(episode);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetEpisodesByMovie), new { movieId = episode.MovieId }, episode);
+            //sor getuserepisode 
+            return CreatedAtAction(nameof(GetEpisodes), new { id = episode.Id }, episode);
         }
+
+
 
         // PUT: api/episodes/5
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateEpisode(int id, [FromBody] UpdateEpisodeDto request)
         {
-            var episode = await _context.Episodes.FindAsync(id);
-            if (episode == null) return NotFound();
 
+            var episode = _context.Episodes.Find(id);
+            if (episode is null) return BadRequest();
             episode.EpisodeNo = request.EpisodeNo;
             episode.SeasonNo = request.SeasonNo;
             episode.Name = request.Name;
 
+            _context.Entry(request).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return NoContent();
         }
@@ -108,10 +115,10 @@ namespace MoviesAndSeries.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEpisode(int id)
         {
-            var episode = await _context.Episodes.FindAsync(id);
-            if (episode == null) return NotFound();
+            var watchHistory = await _context.WatchHistories.FindAsync(id);
+            if (watchHistory == null) return NotFound();
 
-            _context.Episodes.Remove(episode);
+            _context.WatchHistories.Remove(watchHistory);
             await _context.SaveChangesAsync();
             return NoContent();
         }

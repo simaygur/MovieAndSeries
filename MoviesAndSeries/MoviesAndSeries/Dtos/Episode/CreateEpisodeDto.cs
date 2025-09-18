@@ -2,7 +2,7 @@
 {
     public class CreateEpisodeDto
     {
-        public int? SeriesId { get; set; }
+        public int SeriesId { get; set; }
 
         public int? MovieId { get; set; }
 

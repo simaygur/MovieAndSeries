@@ -24,7 +24,7 @@ class ApiService {
       },
       body: json.encode(body),
     );
-    if (response.statusCode != 201 && response.statusCode != 200) {
+    if (response.statusCode != 201) {
       throw Exception('İzleme geçmişi güncellenemedi: ${response.statusCode}');
     }
   }
