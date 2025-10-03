@@ -3,7 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using MoviesAndSeries.Data;
 using MoviesAndSeries.Dtos.Platform;
 using MoviesAndSeries.Models.Entities;
-
+using Microsoft.AspNetCore.Authorization;
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class PlatformsController : ControllerBase

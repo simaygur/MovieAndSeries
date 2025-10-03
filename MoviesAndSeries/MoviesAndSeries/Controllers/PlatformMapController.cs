@@ -2,9 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using MoviesAndSeries.Data;
 using MoviesAndSeries.Models.Entities;
-
+using Microsoft.AspNetCore.Authorization;
 namespace MoviesAndSeries.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PlatformMapsController : ControllerBase

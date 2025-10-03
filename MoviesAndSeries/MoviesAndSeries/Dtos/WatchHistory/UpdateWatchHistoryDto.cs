@@ -4,5 +4,6 @@
     {
         public int EpisodeId { get; set; }
         public int RemainingTime { get; set; }
+        public bool Completed { get; set; }
     }
 }

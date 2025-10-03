@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MoviesAndSeries.Data;
 using MoviesAndSeries.Dtos.Episode;
@@ -9,6 +10,7 @@ using MoviesAndSeries.Models.Entities;
 
 namespace MoviesAndSeries.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MoviesController : ControllerBase
@@ -25,10 +27,9 @@ namespace MoviesAndSeries.Controllers
         public async Task<ActionResult<IEnumerable<Movie>>> GetMovies()
         {
             var movies = await _context.Movies
-       .Select(x => new  ListMovieDto
-       {
-           movie = new ListMovieDto
+           .Select(x => new  ListMovieDto
            {
+               
                Id = x.Id,
                Name = x.Name,
                Description = x.Description,
@@ -51,12 +52,8 @@ namespace MoviesAndSeries.Controllers
                    Id = x.Id,
                    Name = x.Name
                }).ToList()
-
-
-           }
-
-           })
-       .ToListAsync();
+               })
+           .ToListAsync();
 
             return Ok(movies);
             //return await _context.Movies
@@ -91,11 +88,47 @@ namespace MoviesAndSeries.Controllers
                 Score = request.Score,
                 Trailer = request.Trailer,
                 Poster = request.Poster,
-                Description = request.Description
+                Description = request.Description,
+                //GenreMaps = request.GenreIds.Select(x => new GenreMap {GenreId = x}).ToList(),
+                //PlatformMaps = request.PlatformIds.Select(x => new PlatformMap {PlatformId = x}).ToList()
             };
             _context.Movies.Add(movie);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetMovie), new { id = movie.Id }, movie);
+
+            request.GenreIds.ForEach(f =>
+            {
+                _context.GenreMaps.Add(new GenreMap
+                {
+                    SeriesId = null,
+                    MovieId = movie.Id,
+                    GenreId = f 
+                });
+            });
+            
+            request.PlatformIds.ForEach(p =>
+            {
+                _context.PlatformMaps.Add(new PlatformMap()
+                {
+                    SeriesId = null,
+                    MovieId = movie.Id,
+                    PlatformId = p
+                });
+            });
+
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetMovie), new { id = movie.Id }, new
+            {
+                movie.Id,
+                movie.Name,
+                movie.PublicationDate,
+                movie.Score,
+                movie.Trailer,
+                movie.Poster,
+                movie.Description,
+                genreMaps = movie.GenreMaps.Select(s => s.Id).ToList(),
+                platformMaps = movie.PlatformMaps.Select(s => s.Id).ToList(),
+            });
         }
 
         // PUT: api/movies/5

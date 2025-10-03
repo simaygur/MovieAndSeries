@@ -5,9 +5,10 @@ using MoviesAndSeries.Dtos.Episode;
 using MoviesAndSeries.Dtos.User;
 using MoviesAndSeries.Dtos.WatchHistory;
 using MoviesAndSeries.Models.Entities;
-
+using Microsoft.AspNetCore.Authorization;
 namespace MoviesAndSeries.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class WatchHistoryController : ControllerBase
@@ -88,6 +89,7 @@ namespace MoviesAndSeries.Controllers
             if (watchHistory is null) return BadRequest();
             watchHistory.RemainingTime = request.RemainingTime;
             watchHistory.EpisodeId = request.EpisodeId;
+            watchHistory.Completed = request.Completed;
             _context.Entry(watchHistory).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return NoContent();
