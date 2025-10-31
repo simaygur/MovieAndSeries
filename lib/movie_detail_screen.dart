@@ -373,6 +373,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         setState(() {
                           selectedEpisodeIndex = index;
                         });
+                        saveWatchHistory();
                       },
                     );
                   },

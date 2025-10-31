@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MoviesAndSeries.Data;
 using MoviesAndSeries.Dtos.Episode;
@@ -70,6 +70,20 @@ namespace MoviesAndSeries.Controllers
         [HttpPost]
         public async Task<ActionResult<WatchHistory>> AddWatchHistory([FromBody] CreateWatchHistoryDto request)
         {
+            // Upsert: Aynı kullanıcı ve bölüm için kayıt varsa güncelle, yoksa oluştur
+            var existing = await _context.WatchHistories
+                .FirstOrDefaultAsync(x => x.UserId == request.UserId && x.EpisodeId == request.EpisodeId);
+
+            if (existing != null)
+            {
+                existing.RemainingTime = request.RemainingTime;
+                // Bölüm değişmişse güncelle (genelde aynı kalır)
+                existing.EpisodeId = request.EpisodeId;
+                _context.Entry(existing).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return Ok(existing);
+            }
+
             var watchHistory = new WatchHistory()
             {
                 EpisodeId = request.EpisodeId,
